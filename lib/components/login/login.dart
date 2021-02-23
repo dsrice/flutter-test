@@ -1,3 +1,5 @@
+import 'package:flutter_app/repositories/repository.dart';
+
 import '../importer.dart';
 
 class LoginApp extends StatelessWidget {
@@ -33,7 +35,7 @@ class _LoginFormState extends State<LoginForm> {
           padding: const EdgeInsets.all(50.0),
           child: Column(
             children: <Widget>[
-              new TextField(
+              new TextFormField(
                 enabled: true,
                 maxLength: 50,
                 maxLengthEnforced: false,
@@ -44,8 +46,14 @@ class _LoginFormState extends State<LoginForm> {
                   hintText: 'ログインIDを入力してください',
                   labelText: 'ログインID',
                 ),
+                validator: (String value){
+                  return value.isEmpty ? "必須入力です" : null;
+                },
+                onSaved: (String value){
+                  this._login_id = value;
+                },
               ),
-              new TextField(
+              new TextFormField(
                 enabled: true,
                 maxLength: 50,
                 maxLengthEnforced: false,
@@ -56,12 +64,31 @@ class _LoginFormState extends State<LoginForm> {
                   hintText: 'パスワードを入力してください',
                   labelText: 'パスワード',
                 ),
+                validator: (String value){
+                  return value.isEmpty ? "必須入力です" : null;
+                },
+                onSaved: (String value){
+                  this._pass = value;
+                },
+              ),
+              RaisedButton(
+                  onPressed: _submission,
+                  child: Text("ログイン"),
               )
             ]
         )
       )
     );
   }
+  void _submission(){
+    if (this._formKey.currentState.validate()){
+      this._formKey.currentState.save();
+      Scaffold.of(context).showSnackBar(SnackBar(content: Text("Processing Date")));
+      print(this._login_id);
+      print(this._pass);
+      var repo= new Repository();
+      repo.getTodo();
+    }
+  }
 }
-
 
