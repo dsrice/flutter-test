@@ -1,12 +1,33 @@
-import 'package:chopper/chopper.dart';
+import 'package:dio/dio.dart';
 
-part 'loginService.chopper.dart';
+final dio = new Dio();
+final url = "http://10.0.2.2:8000/v1/auth/token";
 
-@ChopperApi(baseUrl: '/v1')
-abstract class loginService extends ChopperService {
-  static loginService create([ChopperClient client]) =>
-      _$loginService(client);
 
-  @Post(headers: {'content-type': 'application / json'}, path: '/auth/token')
-  Future<Response> getTodo(Map<String, dynamic> request);
+Future<Response> login(String loginid, String pass) async{
+  var payload = {
+    "loginid": loginid,
+    "password": pass
+  };
+
+
+  var data = await dio.post(
+    url,
+    data: new FormData.fromMap(payload),
+    options: Options(
+      headers: {
+      },
+    ),
+  ).then((response) {
+    print("service");
+    print(response.data);
+    return response;
+  }).catchError((err){
+    print("error");
+    print(err);
+    return null;
+  });
+  print("test");
+  print(data);
+  return data;
 }

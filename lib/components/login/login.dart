@@ -1,4 +1,6 @@
-import 'package:flutter_app/repositories/repository.dart';
+
+import 'package:dio/dio.dart';
+import 'package:flutter_app/services/loginService.dart';
 
 import '../importer.dart';
 
@@ -80,14 +82,16 @@ class _LoginFormState extends State<LoginForm> {
       )
     );
   }
-  void _submission(){
+  Future<void> _submission() async {
     if (this._formKey.currentState.validate()){
       this._formKey.currentState.save();
       Scaffold.of(context).showSnackBar(SnackBar(content: Text("Processing Date")));
       print(this._login_id);
       print(this._pass);
-      var repo= new Repository();
-      repo.getTodo();
+      var response = await login(this._login_id, this._pass);
+
+      print("login");
+      print(response);
     }
   }
 }
