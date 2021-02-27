@@ -1,7 +1,10 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:io';
+import 'package:flutter_app/common/_const.dart';
 import 'package:flutter_app/components/article/article.dart';
 import 'package:flutter_app/services/loginService.dart';
+import 'package:flutter_app/services/localfileService.dart';
 
 import '../importer.dart';
 
@@ -96,10 +99,14 @@ class _LoginFormState extends State<LoginForm> {
       print(this._login_id);
       print(this._pass);
       var response = await login(this._login_id, this._pass);
-
       print("login");
       print(response);
-      outputFile(response.toString());
+      if(response.statusCode == 200){
+        print(response.data);
+        Map<String, dynamic> user = json.decode(response.toString());
+        outputFile(user["token"].toString(), authfile);
+      }
+
       Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => Article(),
@@ -109,16 +116,3 @@ class _LoginFormState extends State<LoginForm> {
   }
 }
 
-//ファイルの出力処理
-void outputFile(String target) async {
-  print(target);
-  getFilePath().then((File file) {
-    file.writeAsString(target);
-  });
-}
-
-//テキストファイルを保存するパスを取得する
-Future<File> getFilePath() async {
-  final directory = await getApplicationSupportDirectory();
-  return File(directory.path + '/' + _fileName);
-}

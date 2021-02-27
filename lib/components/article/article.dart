@@ -1,12 +1,10 @@
-import 'dart:async';
-import 'dart:io';
+import 'package:flutter_app/common/_const.dart';
+import 'package:flutter_app/services/localfileService.dart';
+
 import '../importer.dart';
 
 import 'package:flutter/material.dart';
-//アプリがファイルを保存可能な場所を取得するライブラリ
-import 'package:path_provider/path_provider.dart';
-
-final _fileName = 'editTextField.txt';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class Article extends StatefulWidget{
   @override
@@ -19,7 +17,7 @@ class _ArticleState extends State<Article>{
 
   void fileload() async {
     setState(() {
-      load().then((String value) {
+      load(authfile).then((String value) {
         setState(() {
           _out = value;
         });
@@ -40,23 +38,24 @@ class _ArticleState extends State<Article>{
                 height: 300,
                 child: Text(_out),
               ),
+            ),
+            bottomNavigationBar: BottomNavigationBar(
+              items: const <BottomNavigationBarItem>[
+                BottomNavigationBarItem(
+                    icon: FaIcon(FontAwesomeIcons.stamp),
+                    label: "スタンプ"
+                ),
+                BottomNavigationBarItem(
+                    icon: FaIcon(FontAwesomeIcons.bookOpen),
+                    label: "記事一覧"
+                ),
+              ],
             )
         )
     );
   }
 }
 
-//テキストファイルを保存するパスを取得する
-Future<File> getFilePath() async {
-  final directory = await getApplicationSupportDirectory();
-  return File(directory.path + '/' + _fileName);
-}
-
-//テキストファイルの読み込み
-Future<String> load() async {
-  final file = await getFilePath();
-  return file.readAsString();
-}
 
 
 

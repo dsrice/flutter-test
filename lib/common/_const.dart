@@ -1,0 +1,2 @@
+
+String authfile = "authfile.txt";
