@@ -2,18 +2,18 @@ import 'importer.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class CommonBottomBar extends StatefulWidget {
-  const CommonBottomBar();
+  const CommonBottomBar(PageController pageController);
 
   @override
   State<StatefulWidget> createState() {
-    return _CommonBottomBar();
-    throw UnimplementedError();
+    State state = _CommonBottomBar();
+    return state;
   }
-
 }
 
 class _CommonBottomBar extends State {
   int _selectedIndex = 0;
+  PageController _pageControlle;
 
   void _onItemTapped(int index) {
     setState(() {
@@ -27,7 +27,7 @@ class _CommonBottomBar extends State {
       items: const <BottomNavigationBarItem>[
         BottomNavigationBarItem(
             icon: FaIcon(FontAwesomeIcons.stamp),
-            label: "スタンプ"
+            label: "スタンプ",
         ),
         BottomNavigationBarItem(
             icon: FaIcon(FontAwesomeIcons.bookOpen),
@@ -40,6 +40,7 @@ class _CommonBottomBar extends State {
       ],
       currentIndex: _selectedIndex,
       onTap: _onItemTapped,
+
     );
   }
 }

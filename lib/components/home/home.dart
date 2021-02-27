@@ -1,11 +1,10 @@
 import '../importer.dart';
 
-class MyApp extends StatelessWidget {
+class Home extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
       home: Scaffold(
         body: Center(
           child: Container(

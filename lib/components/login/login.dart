@@ -6,6 +6,7 @@ import 'package:flutter_app/components/article/article.dart';
 import 'package:flutter_app/services/loginService.dart';
 import 'package:flutter_app/services/localfileService.dart';
 
+import '../common.dart';
 import '../importer.dart';
 
 import 'package:flutter/material.dart';
@@ -109,7 +110,7 @@ class _LoginFormState extends State<LoginForm> {
 
       Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => Article(),
+          MaterialPageRoute(builder: (context) => CommonArea(),
           )
       );
     }

@@ -30,7 +30,6 @@ class _ArticleState extends State<Article>{
   Widget build(BuildContext context) {
     fileload();
     return MaterialApp(
-        title: 'Flutter Demo',
         home: Scaffold(
             body: Center(
               child: Container(
@@ -40,7 +39,6 @@ class _ArticleState extends State<Article>{
                 child: Text(_out),
               ),
             ),
-            bottomNavigationBar: CommonBottomBar()
         )
     );
   }
