@@ -3,7 +3,9 @@ import 'package:dio/dio.dart';
 final dio = new Dio();
 final url = "http://10.0.2.2:8000/v1/auth/token";
 
-
+/*
+認証処理
+ */
 Future<Response> login(String loginid, String pass) async{
   var payload = {
     "loginid": loginid,

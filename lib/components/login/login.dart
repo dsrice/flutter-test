@@ -1,8 +1,15 @@
-
-import 'package:dio/dio.dart';
+import 'dart:async';
+import 'dart:io';
+import 'package:flutter_app/components/article/article.dart';
 import 'package:flutter_app/services/loginService.dart';
 
 import '../importer.dart';
+
+import 'package:flutter/material.dart';
+//アプリがファイルを保存可能な場所を取得するライブラリ
+import 'package:path_provider/path_provider.dart';
+
+final _fileName = 'editTextField.txt';
 
 class LoginApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -92,7 +99,26 @@ class _LoginFormState extends State<LoginForm> {
 
       print("login");
       print(response);
+      outputFile(response.toString());
+      Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => Article(),
+          )
+      );
     }
   }
 }
 
+//ファイルの出力処理
+void outputFile(String target) async {
+  print(target);
+  getFilePath().then((File file) {
+    file.writeAsString(target);
+  });
+}
+
+//テキストファイルを保存するパスを取得する
+Future<File> getFilePath() async {
+  final directory = await getApplicationSupportDirectory();
+  return File(directory.path + '/' + _fileName);
+}
