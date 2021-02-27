@@ -1,7 +1,7 @@
 import 'package:flutter_app/common/_const.dart';
 import 'package:flutter_app/services/localfileService.dart';
 
-import '../common.dart';
+import '../bottombar.dart';
 import '../importer.dart';
 
 import 'package:flutter/material.dart';
@@ -15,13 +15,6 @@ class Article extends StatefulWidget{
 class _ArticleState extends State<Article>{
   // This widget is the root of your application.
   String _out = "";
-  BottomNavigationBar _bar;
-
-  void barstatus() async {
-    setState(() {
-      _bar = CommonBottomBar().base;
-    });
-  }
 
   void fileload() async {
     setState(() {
@@ -36,7 +29,6 @@ class _ArticleState extends State<Article>{
   @override
   Widget build(BuildContext context) {
     fileload();
-    barstatus();
     return MaterialApp(
         title: 'Flutter Demo',
         home: Scaffold(
@@ -48,7 +40,7 @@ class _ArticleState extends State<Article>{
                 child: Text(_out),
               ),
             ),
-            bottomNavigationBar:_bar
+            bottomNavigationBar: CommonBottomBar()
         )
     );
   }
