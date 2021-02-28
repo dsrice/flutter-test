@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_app/const/_filenama.dart';
 import 'package:flutter_app/const/_url.dart';
+import 'package:flutter_app/model/articlemodel.dart';
 import 'package:flutter_app/model/loginmodel.dart';
 
 import '../localfileService.dart';
@@ -29,6 +30,11 @@ Future<Response> articles() async{
   }).catchError((err){
     return null;
   });
+
+  if(data.statusCode == 200){
+    ArticlesModel model = ArticlesModel.fromJson(data);
+    print(model);
+  }
 
   return data;
 }

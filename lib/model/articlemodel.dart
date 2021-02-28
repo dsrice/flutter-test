@@ -11,9 +11,18 @@ class ArticlesModel {
   factory ArticlesModel.fromJson(Response response) => _$ArticlesModelFromJson(response);
 }
 
-_$ArticlesModelFromJson(Response response) {
+ArticlesModel _$ArticlesModelFromJson(Response response) {
   var articles = json.decode(response.toString());
-  articles["articles"].map<ArticleModel>((i) =>_$ArticleModelFromJson(i)).toList();
+  print(articles["articles"][0]["title"]);
+  List articles_map =  articles["articles"];
+  List<ArticleModel> articleList = [];
+  articles_map.forEach((element) {
+    ArticleModel article = _$ArticleModelFromJson(element);
+    articleList.add(article);
+  });
+  return ArticlesModel(
+    articles: articleList
+  );
 }
 
 class ArticleModel {
@@ -25,7 +34,7 @@ class ArticleModel {
   factory ArticleModel.fromJson(Map<String, dynamic> json) => _$ArticleModelFromJson(json);
 }
 
-_$ArticleModelFromJson(Map<String, dynamic> json) {
+ArticleModel _$ArticleModelFromJson(Map<String, dynamic> json) {
   return ArticleModel(
     title: json["title"],
     body: json["body"],
