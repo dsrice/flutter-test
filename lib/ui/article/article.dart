@@ -39,8 +39,29 @@ class _ArticleViewState extends State<ArticleView> {
     }
     List<Widget> list = [];
     articles.forEach((element) {
-      Widget base =  GestureDetector(
-        child:Container(
+      Widget base =  ArticleElement(article: element);
+      list.add(base);
+    });
+    return list;
+  }
+
+  Future<void> _getArticles() async{
+    await articles().then((value) => _articles = value);
+  }
+}
+
+class ArticleElement extends StatelessWidget {
+  final ArticleModel article;
+
+  ArticleElement({
+    this.article
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+        child: InkWell(
+          child: Container(
             padding: EdgeInsets.all(30.0),
             decoration: new BoxDecoration(
                 border: new Border(bottom: BorderSide(width: 1.0, color: Colors.grey))
@@ -51,23 +72,26 @@ class _ArticleViewState extends State<ArticleView> {
                   margin: EdgeInsets.all(10.0),
                 ),
                 Text(
-                  element.title,
+                  article.title,
                   style: TextStyle(
                       color:Colors.black,
                       fontSize: 18.0
                   ),
                 ),
               ],
-            )
-        ),
-      );
-      list.add(base);
-    });
-    return list;
-  }
-
-  Future<void> _getArticles() async{
-    await articles().then((value) => _articles = value);
+            ),
+          ),
+          onTap: (){
+            print("tap");
+            print(this.article.article_id);
+          }
+        )
+    );
   }
 }
+
+
+
+
+
 
