@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
+import 'package:flutter_app/service/api/articleService.dart';
 import 'package:flutter_app/view_model/common/common_view_model.dart';
 
 import '../importer.dart';
@@ -21,7 +22,7 @@ class _ArticleViewState extends State<ArticleView> {
   @override
   Widget build(BuildContext context){
     final CommonViewModel data = Provider.of<CommonViewModel>(context);
-
+    articles();
     return Form(
         child: Container(
             padding: const EdgeInsets.all(50.0),
