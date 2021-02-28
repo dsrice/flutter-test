@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
+import 'package:flutter_app/model/articlemodel.dart';
 import 'package:flutter_app/service/api/articleService.dart';
 import 'package:flutter_app/view_model/common/common_view_model.dart';
 
@@ -18,21 +19,53 @@ class ArticleView extends StatefulWidget {
 }
 
 class _ArticleViewState extends State<ArticleView> {
+  ArticlesModel _articles = ArticlesModel();
 
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     final CommonViewModel data = Provider.of<CommonViewModel>(context);
-    articles();
-    return Form(
-        child: Container(
-            padding: const EdgeInsets.all(50.0),
-            child: Column(
-              children: [
-                Text("test")
+    _getArticles();
+
+    return Container(
+      padding: const EdgeInsets.all(0.0),
+      child: ListView(
+        children: _createList(_articles.articles),
+      )
+    );
+  }
+
+  List<Widget>_createList(List<ArticleModel> articles) {
+    List<Widget> list = [];
+    articles.forEach((element) {
+      Widget base =  GestureDetector(
+        child:Container(
+            padding: EdgeInsets.all(8.0),
+            decoration: new BoxDecoration(
+                border: new Border(bottom: BorderSide(width: 1.0, color: Colors.grey))
+            ),
+            child: Row(
+              children: <Widget>[
+                Container(
+                  margin: EdgeInsets.all(10.0),
+                ),
+                Text(
+                  element.title,
+                  style: TextStyle(
+                      color:Colors.black,
+                      fontSize: 18.0
+                  ),
+                ),
               ],
             )
-        )
-    );
+        ),
+      );
+      list.add(base);
+    });
+    return list;
+  }
+
+  Future<void> _getArticles() async{
+    await articles().then((value) => _articles = value);
   }
 }
 

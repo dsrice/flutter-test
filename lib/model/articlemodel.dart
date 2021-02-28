@@ -13,7 +13,6 @@ class ArticlesModel {
 
 ArticlesModel _$ArticlesModelFromJson(Response response) {
   var articles = json.decode(response.toString());
-  print(articles["articles"][0]["title"]);
   List articles_map =  articles["articles"];
   List<ArticleModel> articleList = [];
   articles_map.forEach((element) {

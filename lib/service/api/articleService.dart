@@ -10,11 +10,10 @@ import '../localfileService.dart';
 final dio = new Dio();
 final url = articleurl;
 
-
 /*
 記事一覧取得処理
  */
-Future<Response> articles() async{
+Future<ArticlesModel> articles() async{
   var token = load(authfile);
   print(token);
   var data = await dio.get(
@@ -34,7 +33,8 @@ Future<Response> articles() async{
   if(data.statusCode == 200){
     ArticlesModel model = ArticlesModel.fromJson(data);
     print(model);
+    return model;
   }
 
-  return data;
+  return null;
 }
