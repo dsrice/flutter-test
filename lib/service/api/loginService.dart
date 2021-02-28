@@ -1,7 +1,13 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_app/const/_filenama.dart';
+import 'package:flutter_app/const/_url.dart';
+import 'package:flutter_app/model/loginmodel.dart';
+
+import '../localfileService.dart';
+
 
 final dio = new Dio();
-final url = "http://10.0.2.2:8000/v1/auth/token";
+final url = loginurl;
 
 /*
 認証処理
@@ -21,15 +27,14 @@ Future<Response> login(String loginid, String pass) async{
       },
     ),
   ).then((response) {
-    print("service");
-    print(response.data);
     return response;
   }).catchError((err){
-    print("error");
-    print(err);
     return null;
   });
-  print("test");
-  print(data);
+
+  if(data.statusCode == 200){
+    LoginModel model = LoginModel.fromJson(data);
+    outputFile(model.token, authfile);
+  }
   return data;
 }

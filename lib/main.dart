@@ -1,7 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/ui/common/common.dart';
 
-import 'components/login/login.dart';
 
 void main() {
-  runApp(LoginApp());
+  runApp(App());
+}
+
+
+class App extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: CommonArea(),
+    );
+  }
 }
