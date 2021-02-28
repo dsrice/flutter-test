@@ -50,6 +50,9 @@ class _CommonAreaState extends State<CommonArea>{
     return ChangeNotifierProvider<CommonViewModel>.value(
       value: data,
       child: Scaffold(
+            appBar: AppBar(
+              title: Text("Demoアプリ"),
+            ),
             body: PageView(
               controller: _pageController,
               onPageChanged: _onPageChanged,
