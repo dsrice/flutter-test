@@ -59,6 +59,7 @@ class ArticleElement extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final CommonViewModel data = Provider.of<CommonViewModel>(context);
     return Card(
         child: InkWell(
           child: Container(
@@ -84,6 +85,7 @@ class ArticleElement extends StatelessWidget {
           onTap: (){
             print("tap");
             print(this.article.article_id);
+            data.setArticleID(this.article.article_id);
           }
         )
     );

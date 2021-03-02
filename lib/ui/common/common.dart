@@ -1,4 +1,5 @@
 import 'package:flutter_app/ui/article/article.dart';
+import 'package:flutter_app/ui/article_detail/article_detail.dart';
 import 'package:flutter_app/ui/bottombar/bottombar.dart';
 import 'package:flutter_app/ui/login/loginvies.dart';
 import 'package:flutter_app/view_model/common/common_view_model.dart';
@@ -21,6 +22,7 @@ class _CommonAreaState extends State<CommonArea>{
     LoginView(),
     ArticleView(),
     ArticleView(),
+    ArticleDetailView(),
   ];
 
   PageController _pageController;
