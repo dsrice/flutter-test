@@ -45,4 +45,8 @@ class CommonViewModel extends ChangeNotifier {
     _pageController.animateToPage(3, duration: Duration(milliseconds: 300), curve: Curves.easeIn);
     notifyListeners();
   }
+
+  int getArtocleID(){
+    return _article_id;
+  }
 }

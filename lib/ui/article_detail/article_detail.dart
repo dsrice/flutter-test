@@ -20,40 +20,107 @@ class ArticleDetailView extends StatefulWidget {
 
 class _ArticleDetailViewState extends State<ArticleDetailView> {
   ArticleDetailModel _article = new ArticleDetailModel();
+  CommonViewModel _data;
 
   @override
   Widget build(BuildContext context) {
-    final CommonViewModel data = Provider.of<CommonViewModel>(context);
-    _getArticleDetail();
-    return Container(
-      padding: const EdgeInsets.all(0.0),
-      child: Scaffold(
-        appBar: AppBar(
-          leading: IconButton(
-            icon: const FaIcon(FontAwesomeIcons.chevronLeft),
-          ),
-          actions: [
-            IconButton(icon: const FaIcon(FontAwesomeIcons.chevronRight), onPressed: null)
-          ],
-          backgroundColor: Colors.white,
-        ),
-        body: Column(
-          children: [
-            Text(_article.title, style:  TextStyle(fontWeight: FontWeight.bold, fontSize: 30)),
-            Html(data: _article.body != null ? _article.body : "<p>test</p>",)
-          ],
-
-        )
-      )
-    );
+    final _data = Provider.of<CommonViewModel>(context);
+    _getArticleDetail(_data.getArtocleID());
+    print(_article);
+    return MultiProvider(
+        providers: [
+          ChangeNotifierProvider<ResultProvider>(
+              create: (context) => ResultProvider()
+          )
+        ],
+        child: Consumer<ResultProvider>(builder: (context, model, _) {
+            model.setArticle(_article);
+            return Container(
+                padding: const EdgeInsets.all(0.0),
+                child: _article == null ? null : Scaffold(
+                    appBar: AppBar(
+                      leading: Visibility(
+                        visible: _article.prov_id != null,
+                        child: IconButton(
+                            icon: const FaIcon(FontAwesomeIcons.chevronLeft),
+                            color: Colors.black,
+                            onPressed: () {
+                              _changeArticleDetail(_article.prov_id, model);
+                            }
+                        ),
+                      ),
+                      actions: [
+                        Visibility(
+                            visible: _article.next_id != null,
+                            child: IconButton(
+                                icon: const FaIcon(FontAwesomeIcons.chevronRight),
+                                color: Colors.black,
+                                onPressed: (){
+                                  print("next");
+                                  print(_article);
+                                  _changeArticleDetail(_article.next_id, model);
+                                }
+                            )
+                        )
+                      ],
+                      backgroundColor: Colors.white,
+                    ),
+                    body: Column(
+                      children: _article.title == null ? [] :[
+                        Text(_article.title, style:  TextStyle(fontWeight: FontWeight.bold, fontSize: 30)),
+                        Html(data: _article.body != null ? _article.body : "<p>test</p>",)
+                      ],
+                    )
+                )
+            );
+        })
+      );
   }
 
-  Future<void> _getArticleDetail() async{
-    await articledetail().then((value) => _article = value);
+  Future<void> _getArticleDetail(int id) async{
+    await articledetail(id).then((value) {
+      _article = value;
+    });
+  }
+
+  Future<void> _changeArticleDetail(int id, ResultProvider model) async{
+    await articledetail(id).then((value) {
+      _article = value;
+    });
+    model.changeArticle(_article);
+    print("change");
   }
 }
 
 
+class ResultProvider extends ChangeNotifier {
+  ArticleDetailModel _article;
+
+  ResultProvider() {
+    initValue();
+  }
+
+  // 初期化
+  void initValue() {
+    this._article = new ArticleDetailModel();
+  }
+
+  void refresh(){
+    initValue();
+    print("更新");
+    notifyListeners();
+  }
+
+  void setArticle(ArticleDetailModel article){
+    _article = article;
+  }
+
+  void changeArticle(ArticleDetailModel article){
+    _article = article;
+    notifyListeners();
+  }
+
+}
 
 
 

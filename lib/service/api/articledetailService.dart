@@ -12,12 +12,12 @@ final url = articledetailurl;
 /*
 記事一覧取得処理
  */
-Future<ArticleDetailModel> articledetail() async{
+Future<ArticleDetailModel> articledetail(int id) async{
   var token = load(authfile);
   print(token);
   var data = await dio.get(
     url,
-    queryParameters: {"article_id": 1},
+    queryParameters: {"article_id": id},
     options: Options(
       headers: {
         "Content-Type": "application/json",
@@ -30,7 +30,8 @@ Future<ArticleDetailModel> articledetail() async{
     return null;
   });
 
-  if(data.statusCode == 200){
+  print(data);
+  if(data != null && data.statusCode == 200){
     ArticleDetailModel model = ArticleDetailModel.fromJson(data);
     print(model);
     return model;
