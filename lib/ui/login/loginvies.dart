@@ -86,7 +86,7 @@ class _LoginViewState extends State<LoginView> {
       var response = await login(this._login_id, this._pass);
       if(response.statusCode == 200){
         data.setSelectedIndex(1);
-        data.getPageController().animateToPage(1, duration: Duration(milliseconds: 300), curve: Curves.easeIn);
+        data.getPageController().animateToPage(2, duration: Duration(milliseconds: 300), curve: Curves.easeIn);
       }
     }
   }
