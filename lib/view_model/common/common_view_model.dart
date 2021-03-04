@@ -8,6 +8,7 @@ class CommonViewModel extends ChangeNotifier {
 
   int _screenid = 0;
   int _selectedindex = -1;
+  int _article_id = -1;
 
   PageController _pageController;
 
@@ -32,5 +33,20 @@ class CommonViewModel extends ChangeNotifier {
 
   PageController getPageController(){
     return _pageController;
+  }
+
+  void movePage(int index){
+    _pageController.animateToPage(index, duration: Duration(milliseconds: 300), curve: Curves.easeIn);
+    notifyListeners();
+  }
+
+  void setArticleID(int id){
+    _article_id = id;
+    _pageController.animateToPage(3, duration: Duration(milliseconds: 300), curve: Curves.easeIn);
+    notifyListeners();
+  }
+
+  int getArtocleID(){
+    return _article_id;
   }
 }

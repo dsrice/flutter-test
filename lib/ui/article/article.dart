@@ -19,13 +19,12 @@ class ArticleView extends StatefulWidget {
 }
 
 class _ArticleViewState extends State<ArticleView> {
-  ArticlesModel _articles = ArticlesModel();
+  ArticlesModel _articles = new ArticlesModel();
 
   @override
   Widget build(BuildContext context) {
     final CommonViewModel data = Provider.of<CommonViewModel>(context);
     _getArticles();
-
     return Container(
       padding: const EdgeInsets.all(0.0),
       child: ListView(
@@ -35,30 +34,12 @@ class _ArticleViewState extends State<ArticleView> {
   }
 
   List<Widget>_createList(List<ArticleModel> articles) {
+    if(articles == null){
+      return [];
+    }
     List<Widget> list = [];
     articles.forEach((element) {
-      Widget base =  GestureDetector(
-        child:Container(
-            padding: EdgeInsets.all(8.0),
-            decoration: new BoxDecoration(
-                border: new Border(bottom: BorderSide(width: 1.0, color: Colors.grey))
-            ),
-            child: Row(
-              children: <Widget>[
-                Container(
-                  margin: EdgeInsets.all(10.0),
-                ),
-                Text(
-                  element.title,
-                  style: TextStyle(
-                      color:Colors.black,
-                      fontSize: 18.0
-                  ),
-                ),
-              ],
-            )
-        ),
-      );
+      Widget base =  ArticleElement(article: element);
       list.add(base);
     });
     return list;
@@ -68,4 +49,51 @@ class _ArticleViewState extends State<ArticleView> {
     await articles().then((value) => _articles = value);
   }
 }
+
+class ArticleElement extends StatelessWidget {
+  final ArticleModel article;
+
+  ArticleElement({
+    this.article
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final CommonViewModel data = Provider.of<CommonViewModel>(context);
+    return Card(
+        child: InkWell(
+          child: Container(
+            padding: EdgeInsets.all(30.0),
+            decoration: new BoxDecoration(
+                border: new Border(bottom: BorderSide(width: 1.0, color: Colors.grey))
+            ),
+            child: Row(
+              children: <Widget>[
+                Container(
+                  margin: EdgeInsets.all(10.0),
+                ),
+                Text(
+                  article.title,
+                  style: TextStyle(
+                      color:Colors.black,
+                      fontSize: 18.0
+                  ),
+                ),
+              ],
+            ),
+          ),
+          onTap: (){
+            print("tap");
+            print(this.article.article_id);
+            data.setArticleID(this.article.article_id);
+          }
+        )
+    );
+  }
+}
+
+
+
+
+
 

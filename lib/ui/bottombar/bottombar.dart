@@ -49,7 +49,7 @@ class _BottomBarViewState extends State<BottomBarView> {
       onTap:(index) async {
         _selectedIndex = index;
         data.setSelectedIndex(index);
-        data.getPageController().animateToPage(index, duration: Duration(milliseconds: 300), curve: Curves.easeIn);
+        data.getPageController().animateToPage(index+1, duration: Duration(milliseconds: 300), curve: Curves.easeIn);
       }
     );
   }

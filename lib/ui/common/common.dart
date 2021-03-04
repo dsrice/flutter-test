@@ -1,6 +1,8 @@
 import 'package:flutter_app/ui/article/article.dart';
+import 'package:flutter_app/ui/article_detail/article_detail.dart';
 import 'package:flutter_app/ui/bottombar/bottombar.dart';
 import 'package:flutter_app/ui/login/loginvies.dart';
+import 'package:flutter_app/ui/stamp/stamp.dart';
 import 'package:flutter_app/view_model/common/common_view_model.dart';
 
 import '../importer.dart';
@@ -19,8 +21,9 @@ class _CommonAreaState extends State<CommonArea>{
 
   static List<Widget> _pageList = [
     LoginView(),
+    StampView(),
     ArticleView(),
-    ArticleView(),
+    ArticleDetailView(),
   ];
 
   PageController _pageController;
@@ -50,6 +53,9 @@ class _CommonAreaState extends State<CommonArea>{
     return ChangeNotifierProvider<CommonViewModel>.value(
       value: data,
       child: Scaffold(
+            appBar: AppBar(
+              title: Text("Demoアプリ"),
+            ),
             body: PageView(
               controller: _pageController,
               onPageChanged: _onPageChanged,
