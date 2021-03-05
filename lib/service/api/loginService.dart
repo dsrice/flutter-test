@@ -34,6 +34,7 @@ Future<Response> login(String loginid, String pass) async{
 
   if(data.statusCode == 200){
     LoginModel model = LoginModel.fromJson(data);
+    deleteFile(authfile);
     outputFile(model.token, authfile);
   }
   return data;
