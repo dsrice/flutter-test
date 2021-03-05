@@ -6,6 +6,7 @@ import 'package:flutter_app/model/stamptotalmodel.dart';
 import 'package:flutter_app/service/api/articleService.dart';
 import 'package:flutter_app/service/api/stamptotalService.dart';
 import 'package:flutter_app/view_model/common/common_view_model.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 
 import '../importer.dart';
 
@@ -33,7 +34,8 @@ class _StampViewState extends State<StampView> {
               _stamptotal.stamp_count.toString() + "個",
               style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold),
           ),
-          Expanded(child: _createGrid(_stamptotal))
+          Expanded(child: _createGrid(_stamptotal)),
+          Expanded(child: const QrCodeLayout())
         ]
     );
   }
@@ -95,6 +97,24 @@ class StampTotalElement extends StatelessWidget {
   }
 }
 
+class QrCodeLayout extends StatelessWidget {
+  const QrCodeLayout({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(''),
+      ),
+      body: Center(
+        child: QrImage(
+          data: 'https://twitter.com/blendthink',
+          size: 200,
+        ),
+      ),
+    );
+  }
+}
 
 
 
