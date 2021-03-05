@@ -3,6 +3,7 @@ import 'package:flutter_app/const/_filenama.dart';
 import 'package:flutter_app/const/_url.dart';
 import 'package:flutter_app/model/loginmodel.dart';
 
+import '../firebaseService.dart';
 import '../localfileService.dart';
 
 
@@ -36,6 +37,7 @@ Future<Response> login(String loginid, String pass) async{
     LoginModel model = LoginModel.fromJson(data);
     deleteFile(authfile);
     outputFile(model.token, authfile);
+    getToken();
   }
   return data;
 }
