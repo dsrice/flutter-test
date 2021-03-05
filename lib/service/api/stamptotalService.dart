@@ -9,12 +9,12 @@ import '../localfileService.dart';
 
 
 final dio = new Dio();
-final url = articleurl;
+final url = stamptotalurl;
 
 /*
 記事一覧取得処理
  */
-Future<StampTotalModel> articles() async{
+Future<StampTotalModel> getStampTotal() async{
   var token = await load(authfile);
   var data = await dio.get(
     url,

@@ -16,6 +16,6 @@ StampTotalModel _$StampTotalModelFromJson(Response response) {
   var result = json.decode(response.toString());
   return StampTotalModel(
       loginid: result["loginid"],
-      stamp_count: result["stamp_count"],
+      stamp_count: result["stamp_count"] as int,
   );
 }
