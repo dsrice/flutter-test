@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter_app/model/articlemodel.dart';
+import 'package:flutter_app/model/stamptotalmodel.dart';
 import 'package:flutter_app/service/api/articleService.dart';
 import 'package:flutter_app/view_model/common/common_view_model.dart';
 
@@ -19,7 +20,7 @@ class StampView extends StatefulWidget {
 }
 
 class _StampViewState extends State<StampView> {
-  ArticlesModel _articles = new ArticlesModel();
+  StampTotalModel _stamptotal = new StampTotalModel();
 
   @override
   Widget build(BuildContext context) {

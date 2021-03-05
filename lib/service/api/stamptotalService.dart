@@ -3,6 +3,7 @@ import 'package:flutter_app/const/_filenama.dart';
 import 'package:flutter_app/const/_url.dart';
 import 'package:flutter_app/model/articlemodel.dart';
 import 'package:flutter_app/model/loginmodel.dart';
+import 'package:flutter_app/model/stamptotalmodel.dart';
 
 import '../localfileService.dart';
 
@@ -13,7 +14,7 @@ final url = articleurl;
 /*
 記事一覧取得処理
  */
-Future<ArticlesModel> articles() async{
+Future<StampTotalModel> articles() async{
   var token = await load(authfile);
   var data = await dio.get(
     url,
@@ -30,7 +31,7 @@ Future<ArticlesModel> articles() async{
   });
 
   if(data.statusCode == 200){
-    ArticlesModel model = ArticlesModel.fromJson(data);
+    StampTotalModel model = StampTotalModel.fromJson(data);
     print(model);
     return model;
   }

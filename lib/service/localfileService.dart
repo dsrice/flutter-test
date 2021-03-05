@@ -23,3 +23,9 @@ Future<File> getFilePath(String filename) async {
   final directory = await getApplicationSupportDirectory();
   return File(directory.path + '/' + filename);
 }
+
+Future<void> deleteFile(String filename) async {
+  await getFilePath(filename).then((File file) {
+    file.delete();
+  });
+}
