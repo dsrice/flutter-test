@@ -1,7 +1,11 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/routor/routes.dart';
+import 'package:flutter_app/service/navigationService.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get_it/get_it.dart';
 
 
 void main() {
@@ -30,17 +34,11 @@ class _AppState extends State<App>{
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: Scaffold(
-        body: Container(
-          child: Center(
-            child: Column(
-              children: [
-                FaU
-              ],
-            ),
-          ),
-        ),
-      )
+      builder: (context, child){
+        return ScrollConfiguration(behavior: null, child: child);
+      },
+      navigatorKey: NavigationService().navigatorKey,
+      onGenerateRoute: Routes.generateRoute,
     );
   }
 
