@@ -1,8 +1,10 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/provider/splashProvider.dart';
 import 'package:flutter_app/provider/stampProvider.dart';
 import 'package:flutter_app/routor/route_path.dart';
+import 'package:flutter_app/view/splashView.dart';
 import 'package:flutter_app/view/stampView.dart';
 import "package:provider/provider.dart";
 
@@ -13,9 +15,17 @@ class Routes{
         return MaterialPageRoute(
           settings: RouteSettings(name: splashPath),
           builder: (context) => ChangeNotifierProvider(
-            create: (context) => StampProvider(context: context),
-            child: StampView()
+            create: (context) => SplashProvider(context: context),
+            child: SplashView()
           )
+        );
+      case stampPath:
+        return MaterialPageRoute(
+            settings: RouteSettings(name: stampPath),
+            builder: (context) => ChangeNotifierProvider(
+                create: (context) => StampProvider(context: context),
+                child: StampView()
+            )
         );
 
     }

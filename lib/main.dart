@@ -3,9 +3,9 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/routor/routes.dart';
 import 'package:flutter_app/service/navigationService.dart';
+import 'package:flutter_app/widget/scroll_behavior.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:get_it/get_it.dart';
 
 
 void main() {
@@ -35,9 +35,12 @@ class _AppState extends State<App>{
         primarySwatch: Colors.blue,
       ),
       builder: (context, child){
-        return ScrollConfiguration(behavior: null, child: child);
+        return ScrollConfiguration(
+            behavior: AppScrollBehavior(),
+            child: child
+        );
       },
-      navigatorKey: NavigationService().navigatorKey,
+      navigatorKey: NavigationService.instance.navigatorKey,
       onGenerateRoute: Routes.generateRoute,
     );
   }
