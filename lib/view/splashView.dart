@@ -28,6 +28,6 @@ class SplashView extends StatelessWidget{
   Future<void> _routing() async {
     print("routing");
     NavigationService service = await NavigationService.instance;
-    service.pushReplacementNamed(stampPath);
+    service.pushReplacementNamed(loginPath);
   }
 }
