@@ -55,6 +55,9 @@ class _AppState extends State<App>{
       badge: true,
       sound: true,
     );
+
+    String token = await messaging.getToken();
+    print(token);
   }
 
   void _initFirebaseMessageing(){
