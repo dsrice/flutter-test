@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/provider/article.dart';
 import 'package:flutter_app/provider/articledetail.dart';
 import 'package:flutter_app/provider/login.dart';
+import 'package:flutter_app/provider/root.dart';
 import 'package:flutter_app/provider/splashProvider.dart';
 import 'package:flutter_app/provider/stampProvider.dart';
 import 'package:flutter_app/provider/userinfo.dart';
@@ -11,6 +12,7 @@ import 'package:flutter_app/routor/route_path.dart';
 import 'package:flutter_app/view/article.dart';
 import 'package:flutter_app/view/articledetail.dart';
 import 'package:flutter_app/view/login.dart';
+import 'package:flutter_app/view/root.dart';
 import 'package:flutter_app/view/splashView.dart';
 import 'package:flutter_app/view/stampView.dart';
 import 'package:flutter_app/view/userinfo.dart';
@@ -33,6 +35,14 @@ class Routes{
             builder: (context) => ChangeNotifierProvider(
                 create: (context) => LoginProvider(context: context),
                 child: LoginView()
+            )
+        );
+      case rootPath:
+        return MaterialPageRoute(
+            settings: RouteSettings(name: stampPath),
+            builder: (context) => ChangeNotifierProvider(
+                create: (context) => RootProvider(context: context),
+                child: RootView()
             )
         );
       case stampPath:

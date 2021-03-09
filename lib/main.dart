@@ -27,6 +27,7 @@ class _AppState extends State<App>{
     _setIniteMessage();
     _initFirebaseMessageing();
   }
+/*
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -44,12 +45,35 @@ class _AppState extends State<App>{
       onGenerateRoute: Routes.generateRoute,
     );
   }
+*/
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+        home:Scaffold(
+      body: Container(
+        child: Center(
+          child: Text("main"),
+        ),
+      ),
+    )
+    );
+  }
 
   Future<void> _setIniteMessage() async {
     await Firebase.initializeApp();
     RemoteMessage initialMessage = await FirebaseMessaging.instance.getInitialMessage();
     FirebaseMessaging messaging = FirebaseMessaging.instance;
 
+    await messaging.requestPermission(
+      alert: true,
+      announcement: false,
+      badge: true,
+      carPlay: false,
+      criticalAlert: false,
+      provisional: false,
+      sound: true,
+    );
     await messaging.setForegroundNotificationPresentationOptions(
       alert: true,
       badge: true,
@@ -64,9 +88,9 @@ class _AppState extends State<App>{
 
 
     const AndroidNotificationChannel channel = AndroidNotificationChannel(
-        "high_importance_channel",
-        "High Importance Notifications",
-        "This channel is used for important notifications.",
+        "base_channel_id",
+        "base_channel_name",
+        "base_channel_descriotion",
         importance: Importance.max,
     );
 
@@ -79,12 +103,6 @@ class _AppState extends State<App>{
 
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       print("test");
-      const AndroidNotificationChannel channel = AndroidNotificationChannel(
-        "high_importance_channel",
-        "High Importance Notifications",
-        "This channel is used for important notifications.",
-        importance: Importance.max,
-      );
       RemoteNotification notification = message.notification;
       AndroidNotification android = message.notification?.android;
 
@@ -98,9 +116,9 @@ class _AppState extends State<App>{
             notification.body,
             NotificationDetails(
               android: AndroidNotificationDetails(
-                "high_importance_channel",
-                "High Importance Notifications",
-                "This channel is used for important notifications.",
+                  "base_channel_id",
+                  "base_channel_name",
+                  "base_channel_descriotion",
                 icon: "ic_stat_name"// other properties...
               ),
             ));

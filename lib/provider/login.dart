@@ -2,7 +2,9 @@ import 'dart:async';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_app/routor/route_path.dart';
 import 'package:flutter_app/service/api/loginService.dart';
+import 'package:flutter_app/service/navigationService.dart';
 import 'package:rxdart/subjects.dart';
 
 class LoginProvider with ChangeNotifier{
@@ -36,6 +38,8 @@ class LoginProvider with ChangeNotifier{
     final password = _password.values.last;
 
     Response response = await LoginService.login(loginid, password);
-    print(response);
+    if(response != null && response.statusCode == 200){
+      NavigationService.instance.pushReplacementNamed(rootPath);
+    }
   }
 }
