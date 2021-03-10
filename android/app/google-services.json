@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "386020201770",
+    "project_id": "fapp-demo",
+    "storage_bucket": "fapp-demo.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:386020201770:android:34bbb34898c88f8b683a53",
+        "android_client_info": {
+          "package_name": "com.example.flutter_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "386020201770-nm6t1kosbkpq6sjp6reoo42r3e8mmgtu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBnsrpWTvx4lK9ZnXA0SDOopi1fQOo8sW4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "386020201770-nm6t1kosbkpq6sjp6reoo42r3e8mmgtu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
