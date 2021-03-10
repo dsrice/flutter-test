@@ -8,39 +8,16 @@ class StampView extends StatelessWidget{
   Widget build(BuildContext context) {
     final watch = context.watch<StampProvider>();
     print("stamp");
-    _getFutureValue();
     return Scaffold(
             appBar: AppBar(
-              title: Center(
-                child: Text("スタンプ状況"),
-              )
+              leading: Container(),
+              title: const Text("スタンプ状況"),
+              centerTitle: true,
             ),
             body: Container(
-                child: GestureDetector(
-                  onTap: (){
-                    FocusScope.of(context).requestFocus(FocusNode());
-                  },
-                  child: _fadeInStamp(context),
+              child: Text("スタンプ"),
               ),
-            )
-          );
+            );
   }
-
-  Widget _fadeInStamp(BuildContext context){
-    return SingleChildScrollView(
-      child: Container(
-        child: Text("stamp")
-        ),
-    );
-
-  }
-  Future<String> _getFutureValue() async {
-    // 擬似的に通信中を表現するために１秒遅らせる
-    await Future.delayed(
-      Duration(seconds: 1),
-    );
-    return Future.value("データの取得に成功しました");
-  }
-
 
 }

@@ -10,13 +10,12 @@ class UserInfoView extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     final watch = context.watch<UserInfoProvider>();
-    print("stamp");
-    _getFutureValue();
+    print("userinfo");
     return Scaffold(
             appBar: AppBar(
-              title: Center(
-                child: Text("記事"),
-              )
+              leading: Container(),
+              title: Text("設定"),
+              centerTitle: true,
             ),
             body: Container(
                 child: GestureDetector(
@@ -32,18 +31,9 @@ class UserInfoView extends StatelessWidget{
   Widget _fadeInStamp(BuildContext context){
     return SingleChildScrollView(
       child: Container(
-        child: Text("stamp")
+        child: Text("userinfo")
         ),
     );
 
   }
-  Future<String> _getFutureValue() async {
-    // 擬似的に通信中を表現するために１秒遅らせる
-    await Future.delayed(
-      Duration(seconds: 1),
-    );
-    return Future.value("データの取得に成功しました");
-  }
-
-
 }

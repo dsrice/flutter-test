@@ -13,9 +13,9 @@ class ArticleView extends StatelessWidget{
     _getFutureValue();
     return Scaffold(
             appBar: AppBar(
-              title: Center(
-                child: Text("記事"),
-              )
+              leading: Container(),
+              title: Text("記事"),
+              centerTitle: true,
             ),
             body: Container(
                 child: GestureDetector(

@@ -29,6 +29,9 @@ class _RootViewState extends State<RootView>{
   
   @override
   Widget build(BuildContext context){
+    Future.delayed(Duration(seconds: 1), (){
+      NavigationService.instance.pushNamed(bottomPath);
+    });
     return Container(
       color: Colors.white
     );
