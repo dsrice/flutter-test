@@ -1,10 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/const/_url.dart';
 import 'package:flutter_app/model/article.dart';
 import 'package:flutter_app/provider/article.dart';
 import 'package:flutter_app/provider/login.dart';
 import 'package:flutter_app/provider/stampProvider.dart';
+import 'package:flutter_app/routor/route_path.dart';
+import 'package:flutter_app/service/navigationService.dart';
 import 'package:provider/provider.dart';
+
+import 'articledetail.dart';
 
 class ArticleView extends StatefulWidget {
   @override
@@ -102,6 +107,8 @@ class ArticleElement extends StatelessWidget {
             onTap: (){
               print("tap");
               print(this.article.article_id);
+              ArticleDetailArguments arg = ArticleDetailArguments(article);
+              NavigationService.instance.pushNamed(article_detailPath, argumants: arg);
             }
         )
     );

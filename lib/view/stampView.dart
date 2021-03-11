@@ -19,47 +19,45 @@ class StampView extends StatelessWidget{
               centerTitle: true,
             ),
             body: Container(
-              child: Column(
-                children: _createGrid(context),
-              ),
+              child: _createGrid(context),
               ),
             );
   }
 
-  List<Widget> _createGrid(BuildContext context){
+  Widget _createGrid(BuildContext context){
     return context
         .watch<StampProvider>()
         .loading
         ? _loadingIndicator(context) : _buildContext(context);
   }
 
-  List<Widget> _loadingIndicator(BuildContext context){
+  Widget _loadingIndicator(BuildContext context){
     Future.delayed(Duration(seconds: 1),
             () => context.read<StampProvider>().check());
 
-    return [
-        Center(
+    return Center(
           child: CircularProgressIndicator(
             strokeWidth: 4,
           ),
-        ),
-    ];
+        );
   }
 
-  List<Widget> _buildContext(BuildContext context){
+  Widget _buildContext(BuildContext context){
     int total_count = context.read<StampProvider>().stamptotalmodel.stamp_count;
     int base_count = total_count % 10;
     if(base_count == 0){
       base_count = 10;
     }
 
-    return [
-      Text(
-          total_count.toString() + "個",
-          style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold)
-      ),
-      Expanded(child: StampTotalElement(context: context))
-    ];
+    return Column(
+      children: [
+        Text(
+            total_count.toString() + "個",
+            style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold)
+        ),
+        Expanded(child: StampTotalElement(context: context))
+      ],
+    );
   }
 }
 

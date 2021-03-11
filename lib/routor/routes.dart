@@ -72,11 +72,12 @@ class Routes{
             )
         );
       case article_detailPath:
+        final ArticleDetailArguments arg = settings.arguments;
         return MaterialPageRoute(
             settings: RouteSettings(name: stampPath),
             builder: (context) => ChangeNotifierProvider(
                 create: (context) => ArticleDetailProvider(context: context),
-                child: ArticleDetailView()
+                child: ArticleDetailView(article: arg.article,)
             )
         );
       case userinfoPath:
