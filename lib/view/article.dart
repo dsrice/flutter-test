@@ -25,7 +25,7 @@ class _ArticleViewState extends State<ArticleView> {
     return Scaffold(
       appBar: AppBar(
         leading: Container(),
-        title: const Text("スタンプ状況"),
+        title: const Text("記事一覧"),
         centerTitle: true,
       ),
       body: Container(
